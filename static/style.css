@@ -1,0 +1,13 @@
+body { font-family: sans-serif; margin: 1rem; }
+nav a { margin: 0 .5rem; text-decoration: none; }
+.grid { display: flex; flex-wrap: wrap; gap: 1rem; }
+.card {
+  border: 1px solid #ccc; padding: .5rem; border-radius: 4px;
+  width: 200px;
+}
+.flashes { list-style: none; padding: 0; }
+.flash { padding: .5rem; margin: .5rem 0; border-radius: 3px; }
+.flash.success { background: #e0ffe0; }
+.flash.warning { background: #fff8e0; }
+.flash.danger  { background: #ffe0e0; }
+.flash.info    { background: #e0f0ff; }

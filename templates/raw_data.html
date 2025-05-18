@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Scraped Data{% endblock %}
+
+{% block content %}
+  <h1>All Scraped Books</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Price</th>
+        <th>Rating</th>
+        <th>Availability</th>
+        <th>Link</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for b in books %}
+        <tr>
+          <td>{{ b.title }}</td>
+          <td>{{ b.price_clean }}</td>
+          <td>{{ b.rating }}</td>
+          <td>{{ b.availability }}</td>
+          <td><a href="{{ b.url }}" target="_blank">View</a></td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

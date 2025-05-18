@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Search Books{% endblock %}
+{% block content %}
+  <h1>Search</h1>
+  <form method="POST" action="{{ url_for('search') }}">
+    <label>Min Rating:
+      <select name="min_rating">
+        {% for r in range(1,6) %}
+          <option value="{{ r }}">{{ r }}★</option>
+        {% endfor %}
+      </select>
+    </label>
+    <label>Max Price:
+      <input type="number" step="0.01" name="max_price" value="50.00">
+    </label>
+    <button type="submit">Filter</button>
+  </form>
+
+  <h2>Results</h2>
+  {% if results %}
+    <div class="grid">
+      {% for id, title, price, rating, avail in results %}
+        <div class="card">
+          <h3>{{ title }}</h3>
+          <p>£{{ "%.2f"|format(price) }} — {{ rating }}★</p>
+          <a href="{{ url_for('book_detail', book_id=id) }}">Details</a>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p>No books to display.</p>
+  {% endif %}
+{% endblock %}

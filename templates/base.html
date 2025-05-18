@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}Book App{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav>
+    <a href="{{ url_for('list_books') }}">Home</a> |
+    <a href="{{ url_for('search') }}">Search</a> |
+    <a href="{{ url_for('scrape_books') }}">Scrape</a> |
+    <a href="{{ url_for('raw_data') }}">Raw Data</a>
+  </nav>
+  <hr>
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <ul class="flashes">
+      {% for category, msg in messages %}
+        <li class="flash {{ category }}">{{ msg }}</li>
+      {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
+  <div class="container">
+    {% block content %}{% endblock %}
+  </div>
+</body>
+</html>

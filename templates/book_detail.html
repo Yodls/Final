@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Book Details{% endblock %}
+{% block content %}
+  <h1>{{ book[1] }}</h1>
+  <ul>
+    <li><strong>Price:</strong> £{{ "%.2f"|format(book[2]) }}</li>
+    <li><strong>Rating:</strong> {{ book[3] }}★</li>
+    <li><strong>Availability:</strong> {{ book[4] }}</li>
+    <li><strong>URL:</strong> <a href="{{ book[5] }}" target="_blank">View on site</a></li>
+  </ul>
+  <p><a href="{{ url_for('list_books') }}">&larr; Back to list</a></p>
+{% endblock %}
