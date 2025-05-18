@@ -216,12 +216,15 @@ analyzer = None
 @app.route("/books")
 def list_books():
     global analyzer
-    if analyzer is None or analyzer.is_empty():
-        analyzer = BookDataAnalyzer(json_file="books_data.json")
-        if analyzer.is_empty():
-            flash("No data available. Please scrape first.", "warning")
-            return redirect(url_for("scrape_books"))
 
+    # 1) Auto‐scrape page 1 on every home load
+    scraper = BookScraper()
+    books = scraper.scrape_multiple_pages(num_pages=1)
+    scraper.save_to_json()
+    analyzer = BookDataAnalyzer(books_data=books)
+    db.insert_books(analyzer.df)
+
+    # 2) Now fetch from the database as usual
     cur = db.conn.cursor()
     cur.execute(
         "SELECT id, title, price, rating, availability FROM books ORDER BY id"
